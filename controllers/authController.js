@@ -4,7 +4,7 @@ const { errorHandler } = require('../utils/error');
 const jwt = require('jsonwebtoken');
 
 
- const signup = async (req, res, next) => {
+ exports.signup = async (req, res, next) => {
     const { username, email, password } = req.body;
     const hashedPassword = bcryptjs.hashSync(password, 10);
     const user = new User({ username, email, password: hashedPassword });
@@ -16,7 +16,7 @@ const jwt = require('jsonwebtoken');
     }
   };
 
-   const signin = async (req, res, next) => {
+  exports.signin = async (req, res, next) => {
     const { email, password } = req.body;
     try {
       const validUser = await User.findOne({ email });
@@ -34,7 +34,7 @@ const jwt = require('jsonwebtoken');
     }
   };
 
-   const google = async (req, res, next)=>{
+   exports.google = async (req, res, next)=>{
     try{
       const user = await User.findOne({email:req.body.email});
       if(user){
@@ -59,7 +59,7 @@ const jwt = require('jsonwebtoken');
     }
   }
 
-const signout = async(req, res, next)=>{
+exports.signout = async(req, res, next)=>{
   try{
     res.clearCookie('access_token');
     res.status(200).json("user is loged out");
@@ -68,6 +68,6 @@ const signout = async(req, res, next)=>{
   }
 }
 
-module.exports = {signup, signin, google,
-  signout
-}
+// module.exports = {signup, signin, google,
+//   signout
+// }
