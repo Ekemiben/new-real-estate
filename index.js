@@ -40,7 +40,7 @@ app.use("/server/listing", listingRouter);
 
 // Middleware to handle errors
 app.use((err, req, res, next) => {
-  const statusCode = err.statusCode || process.env.API_PORT;
+  const statusCode = err.statusCode || process.env.PORT;
   const message = err.message || "Internal Server Error";
   return res.status(statusCode).json({
     success: false,
@@ -50,7 +50,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start the server
-app.listen(process.env.API_PORT, () => {
+app.listen(process.env.PORT, () => {
   console.log("Server is running on port 5000");
 });
 
